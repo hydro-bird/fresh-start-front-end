@@ -8,6 +8,7 @@ import {
 
 import Search from './Search.js'
 import Login from './Login.js';
+import NavBar from './NavBar.js';
 
 
 class AboutUs extends Component {
@@ -23,8 +24,10 @@ class AboutUs extends Component {
 
   render() {
     return (
+      <Fragment>
+      <NavBar></NavBar>
       <div>ABOUT US</div>
-
+      </Fragment>
     )
 
   }

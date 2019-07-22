@@ -6,23 +6,35 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import Search from './Search.js'
+import Search from './Search.js';
 import Login from './Login.js';
-import AboutUs from './AboutUs.js'
+import AboutUs from './AboutUs.js';
+import superagent from 'superagent';
 
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: ''
+      user: '',
+      favorites: [],
+      id: ''
+
     }
 
   }
-  handleUserSubmit = (user =>{
-    this.setState({user: user});
+  handleUserSubmit = (user) =>{
+    
+    
     console.log('we have a user',user);
-  })
+    superagent.get('http://5d3246fc4901b4001401a82e.mockapi.io/user')
+    .then(result => {
+      let newState = this.state;
+      newState = result.body[0];
+      this.setState(newState);
+      console.log(result.body);
+    });
+  }
   
 
   render() {
