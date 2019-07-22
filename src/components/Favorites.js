@@ -29,6 +29,10 @@ class Favorites extends Component {
     }
 
   }
+  componentDidMount(){
+    console.log(this.props.location)
+  }
+
   handleClick = (e, titleProps) => {
     const { index } = titleProps
     const { activeIndex } = this.state

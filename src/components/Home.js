@@ -35,6 +35,11 @@ class Home extends Component {
       console.log(result.body);
     });
   }
+  handleFavoriteAdd = (city) =>{
+    console.log(city);
+    let newState = this.state;
+    newState.favorites.push(city);
+  }
   
 
   render() {
@@ -42,7 +47,7 @@ class Home extends Component {
       if(this.state.user === ''){
         return (<Login handleUserSubmit={this.handleUserSubmit}></Login>)
       }else{
-        return (<Search></Search>)
+        return (<Search userData={this.state} handleFavoriteAdd={this.handleFavoriteAdd}></Search>)
       }
   }
 

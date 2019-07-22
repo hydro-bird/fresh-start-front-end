@@ -29,7 +29,12 @@ class NavBar extends Component {
         <h3>Fresh Start</h3>
         <Link to="/"> HOME</Link>
         <Link to="/about-us">About Us</Link>
-        <Link to="/Favorites">Favorites</Link>
+        <Link to={{
+          pathname: '/Favorites',
+          state: {
+            userData: this.props.userData
+          }
+        }}>Favorites</Link>
       </Fragment>
     )
 

@@ -26,12 +26,13 @@ class Search extends Component {
 
   addFavorite = () => {
     console.log('save', this.state.cityName)
+    this.props.handleFavoriteAdd(this.state.cityName);
   }
 
   render() {
     return (
       <Fragment>
-        <NavBar></NavBar>
+        <NavBar userData={this.props.userData}></NavBar>
         <h1>Search For a City</h1>
         <input placeholder="City Name"></input>
         <button onClick={this.handleClick}>Search</button>
