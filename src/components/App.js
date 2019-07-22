@@ -10,6 +10,7 @@ import Search from './Search.js'
 import Login from './Login.js';
 import AboutUs from './AboutUs.js'
 import Home from './Home.js'
+import Favorites from './Favorites.js';
 
 
 class App extends Component {
@@ -29,6 +30,7 @@ class App extends Component {
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route path="/about-us" component={AboutUs} />
+        <Route path="/favorites" component={Favorites} />
       </Switch>
 
     )

@@ -1,5 +1,13 @@
 import React, { Fragment, Component } from 'react';
-
+import {
+  BrowserRouter as Router,
+  Link,
+  Route,
+  Switch,
+} from 'react-router-dom';
+import AboutUs from './AboutUs.js';
+import Home from './Home.js';
+import Favorites from './Favorites.js'
 
 
 class NavBar extends Component {
@@ -18,10 +26,10 @@ class NavBar extends Component {
   render() {
     return (
       <Fragment>
-        <p>Fresh Start</p>
-        <p>HOME</p>
-        <p>About Us</p>
-        <p>Favorites</p>
+        <h3>Fresh Start</h3>
+        <Link to="/"> HOME</Link>
+        <Link to="/about-us">About Us</Link>
+        <Link to="/Favorites">Favorites</Link>
       </Fragment>
     )
 

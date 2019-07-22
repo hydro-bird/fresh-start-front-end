@@ -1,6 +1,8 @@
 import React, { Fragment, Component } from 'react';
 
-import NavBar from './NavBar'
+import NavBar from './NavBar';
+import superagent from 'superagent'
+
 
 class Search extends Component {
   constructor(props) {
@@ -12,7 +14,14 @@ class Search extends Component {
   }
   handleClick = (e) => {
     e.preventDefault();
-    console.log('click')
+    superagent.get('http://5d3246fc4901b4001401a82e.mockapi.io/city')
+    .then(result => {
+      console.log(result.body);
+      let newState = this.state;
+      newState = result.body[0];
+      this.setState(newState);
+    });
+
   }
 
   render() {
@@ -23,9 +32,9 @@ class Search extends Component {
         <input placeholder="City Name"></input>
         <button onClick={this.handleClick}>Search</button>
         <section>
-          <h3>Seattle</h3>
-          <p>Population</p>
-          <div>MAP GOES Here</div>
+        <h3>{this.state.cityName}</h3>
+          <p>{this.state.population}</p>
+          <div>latitude: {this.state.latitude} longitude: {this.state.longitude}</div>
           <div>Quality of Life</div>
         </section>
       </Fragment>
