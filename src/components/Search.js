@@ -21,7 +21,11 @@ class Search extends Component {
       newState = result.body[0];
       this.setState(newState);
     });
+  
+  }
 
+  addFavorite = () => {
+    console.log('save', this.state.cityName)
   }
 
   render() {
@@ -36,6 +40,7 @@ class Search extends Component {
           <p>{this.state.population}</p>
           <div>latitude: {this.state.latitude} longitude: {this.state.longitude}</div>
           <div>Quality of Life</div>
+          <button onClick={this.addFavorite}> Add to Favorite</button>
         </section>
       </Fragment>
     )
