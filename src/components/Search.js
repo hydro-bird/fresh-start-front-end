@@ -82,8 +82,7 @@ class Search extends Component {
         datasets: [
           {
             label: 'My First dataset',
-            backgroundColor: 'rgba(255,99,132,0.2)',
-            borderColor: 'rgba(255,99,132,1)',
+            backgroundColor: this.state.cityData.categories.map(el => el.score_out_of_10 > 7?'green': el.score_out_of_10 >4 && el.score_out_of_10 <= 7?'yellow': 'red'),
             borderWidth: 1,
             hoverBackgroundColor: 'rgba(255,99,132,0.4)',
             hoverBorderColor: 'rgba(255,99,132,1)',
