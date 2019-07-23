@@ -8,6 +8,11 @@ class Favorites extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userData: {
+        userName: '',
+        favorites: [],
+        id: ''
+      },
       activeIndex: 0,
       cities: [ 
         {
@@ -30,7 +35,10 @@ class Favorites extends Component {
 
   }
   componentDidMount(){
-    console.log(this.props.location)
+    console.log(this.props.location);
+    let newState = this.state;
+    newState.userData = this.props.location.state.userData
+    this.setState(newState);
   }
 
   handleClick = (e, titleProps) => {
@@ -39,6 +47,16 @@ class Favorites extends Component {
     const newIndex = activeIndex === index ? -1 : index
     this.setState({ activeIndex: newIndex })
   }
+
+  removeFavorite = (e)=>{
+    console.log('click')
+    console.log(e.target.name)
+  }
+  addFavorite = (e)=>{
+    console.log('click')
+    console.log(e.target.name)
+  }
+
   render() {
     const { activeIndex } = this.state
     return (
@@ -60,6 +78,8 @@ class Favorites extends Component {
           <div>latitude: {el.latitude} longitude: {el.longitude}</div>
           <div>Quality of Life</div>
           
+          <button onClick={this.removeFavorite} name={el.cityName}> Remove From Fav</button>
+         
         </Accordion.Content>
         </Fragment>
           )
