@@ -16,7 +16,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: '',
+      userName: '',
       favorites: [],
       id: ''
 
@@ -39,7 +39,7 @@ class Home extends Component {
 
   render() {
    
-      if(this.state.user === ''){
+      if(this.state.userName === ''){
         return (<Login handleUserSubmit={this.handleUserSubmit}></Login>)
       }else{
         return (<Search></Search>)
