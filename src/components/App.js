@@ -6,11 +6,12 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import Search from './Search.js'
-import Login from './Login.js';
-import AboutUs from './AboutUs.js'
-import Home from './Home.js'
-import Favorites from './Favorites.js';
+import Search from "./Search.js";
+import Login from "./Login.js";
+import AboutUs from "./AboutUs.js";
+import Home from "./Home.js";
+import Favorites from "./Favorites.js";
+import "../App.css";
 
 
 class App extends Component {

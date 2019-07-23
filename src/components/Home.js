@@ -70,8 +70,8 @@ class Home extends Component {
   
 
   render() {
-      console.log(this.state)
       if(this.state.userName === ""){
+
         return (<Login handleUserSubmit={this.handleUserSubmit}></Login>)
       }else{
         return (<Search userData={this.state} handleFavoriteAdd={this.handleFavoriteAdd} handleFavoriteRemove={this.handleFavoriteRemove}></Search>)

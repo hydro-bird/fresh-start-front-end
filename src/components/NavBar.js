@@ -8,6 +8,7 @@ import {
 import AboutUs from './AboutUs.js';
 import Home from './Home.js';
 import Favorites from './Favorites.js'
+import "../App.css";
 
 
 class NavBar extends Component {
@@ -25,17 +26,18 @@ class NavBar extends Component {
 
   render() {
     return (
-      <Fragment>
+      <div className="links">
         <h3>Fresh Start</h3>
-        <Link to="/"> HOME</Link>
-        <Link to="/about-us">About Us</Link>
-        <Link to={{
+        <Link id="linkOne" to="/"> HOME</Link>
+        <Link id="linkTwo" to="/about-us">About Us</Link>
+        <Link id="linkThree" to={{
           pathname: '/Favorites',
           state: {
             userData: this.props.userData
           }
         }}>Favorites</Link>
-      </Fragment>
+      </div>
+
     )
 
   }
