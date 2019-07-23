@@ -29,7 +29,7 @@ body {
   }
 } 
 
-h1 {
+.title {
   text-align: center;
   color: aqua;
   padding: 100px 0;
@@ -43,7 +43,52 @@ h1 {
 .links {
   
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+   
+}
+.links h3 {
+  color: lightseagreen;
+  font-style: italic;
+  font-family: monospace;
+  
+}
+#linkOne:hover {
+  color: #ffa500;
+}
+#linkOne {
+  font-size: 30px;
+  font-style: italic;
+  font-family: monospace;
+}
+#linkTwo:hover {
+  color: #ffa500;
+}
+#linkTwo {
+  font-size: 30px;
+  font-style: italic;
+  font-family: monospace;
+}
+#linkThree:hover {
+  color: #ffa500;
+}
+#linkThree {
+  font-size: 30px;
+  font-style: italic;
+  font-family: monospace;
+}
+
+.searchForCity {
+  text-align: center;
+  color: aqua;
+  padding: 0px 0;
+  font-style: italic;
+  font-variant: small-caps;
+  font-size: 70px;
+  font-weight: bolder;
+}
+#chart {
+  max-width: 800px;
+  max-height: 200px;
 }
 
 
