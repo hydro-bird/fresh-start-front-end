@@ -4,6 +4,7 @@ import NavBar from './NavBar';
 import superagent from 'superagent';
 import { Bar } from 'react-chartjs-2';
 import "../App.css";
+import { async } from 'q';
 
 class Search extends Component {
   constructor(props) {
@@ -11,11 +12,12 @@ class Search extends Component {
     this.state = {
         input: '',
         cityData: {
-          cityName: 'tacoma',
+          name: 'tacoma',
           population: '100',
           latitude: '19',
           longitude: '45',
-          quality: {},
+          geoNameId: '',
+          categories: [],
         }
         
       }
@@ -24,15 +26,20 @@ class Search extends Component {
   }
   handleClick = (e) => {
     e.preventDefault();
-    superagent.get('http://5d3246fc4901b4001401a82e.mockapi.io/city')
-    .then(result => {
-      console.log(result.body);
+    (async () => {
+      let response = await superagent.get(`https://fresh-start-back-end.herokuapp.com/search?city=${this.state.input}`)
       let newState = this.state;
-      newState.cityData = result.body[0];
-      newState.input = '';
-      this.setState(newState);
-    });
-  
+      newState.cityData.name = response.body.name;
+      newState.cityData.population = response.body.population;
+      newState.cityData.latitude = response.body.latitude;
+      newState.cityData.longitude = response.body.longitude;
+      newState.cityData.geoNameId = response.body.geoNameId;
+      newState.cityData.categories = response.body.categories;
+
+      await this.setState(newState);
+      
+      console.log(this.state);
+    })();
   }
   handleInput = (e) =>{
     let newState = this.state;
@@ -56,12 +63,12 @@ class Search extends Component {
         <input placeholder="City Name" onChange={this.handleInput} value={this.state.input}></input>
         <button onClick={this.handleClick}>Search</button>
         <section>
-        <h3>{this.state.cityData.cityName}</h3>
+        <h3>{this.state.cityData.name}</h3>
           <p>{this.state.cityData.population}</p>
           <div>latitude: {this.state.cityData.latitude} longitude: {this.state.cityData.longitude}</div>
           <div>Quality of Life</div>
           
-          { this.props.userData.favorites.includes(this.state.cityData.cityName)
+          { this.props.userData.favorites.includes(this.state.cityData.name)
           ? <button onClick={this.removeFavorite}> Remove From Fav</button>
           : <button onClick={this.addFavorite}> Add to Favorite</button>
         }
@@ -71,7 +78,7 @@ class Search extends Component {
         <section id="chart">
            
         <Bar 
-        data={{labels: ['Housing', 'Cost of living', 'Startups', 'Venture Capital', 'Travel Connectivity', 'Commute', 'Business Freedom','Safety','Health Care', 'Education', 'Environmental Quality', 'Economy', 'Taxation', 'Internet access', 'Leisure & Culture', 'Tolerance', 'Outdoors'],
+        data={{labels: this.state.cityData.categories.map(el=>el.name),
         datasets: [
           {
             label: 'My First dataset',
@@ -80,7 +87,7 @@ class Search extends Component {
             borderWidth: 1,
             hoverBackgroundColor: 'rgba(255,99,132,0.4)',
             hoverBorderColor: 'rgba(255,99,132,1)',
-            data: [2.29, 3.79, 8.36, 7.55, 2.88, 4.52, 8.67, 5.63, 8.72, 5.71, 7.56, 6.51, 4.77, 4.94, 8.11, 8.08, 7.20]
+            data: this.state.cityData.categories.map(el=>el.score_out_of_10)
           }
         ]}}
         
