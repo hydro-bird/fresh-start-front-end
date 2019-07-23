@@ -18,7 +18,7 @@ class Home extends Component {
     this.state = {
       userName: '',
       favorites: [],
-      id: ''
+      user_id: ''
 
     }
 
@@ -37,6 +37,7 @@ class Home extends Component {
       let newState = this.state;
       newState.userName = response.body.username;
       newState.favorites = response.body.faveCities;
+      newState.user_id = response.body.user_id;
       await this.setState(newState);
       sessionStorage.setItem('userData', JSON.stringify(this.state));
 
