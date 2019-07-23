@@ -32,15 +32,15 @@ class Home extends Component {
   }
 
   handleUserSubmit = (user) =>{
-    console.log('we have a user',user);
-    superagent.get('http://5d3246fc4901b4001401a82e.mockapi.io/user')
-    .then(result => {
+    (async () => {
+      let response = await superagent.get(`https://fresh-start-back-end.herokuapp.com/user?email=${user}`)
       let newState = this.state;
-      newState = result.body[0];
-      this.setState(newState);
-      console.log(result.body);
+      newState.userName = response.body.username;
+      newState.favorites = response.body.faveCities;
+      await this.setState(newState);
       sessionStorage.setItem('userData', JSON.stringify(this.state));
-    });
+
+    })();
   }
   handleFavoriteAdd = (city) =>{
     console.log(city);
