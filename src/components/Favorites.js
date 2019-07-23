@@ -36,9 +36,9 @@ class Favorites extends Component {
   }
   componentDidMount(){
     console.log(this.props.location);
-    let newState = this.state;
-    newState.userData = this.props.location.state.userData
-    this.setState(newState);
+    // let newState = this.state;
+    // newState.userData = this.props.location.state.userData
+    // this.setState(newState);
   }
 
   handleClick = (e, titleProps) => {

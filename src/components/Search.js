@@ -1,8 +1,9 @@
 import React, { Fragment, Component } from 'react';
 
 import NavBar from './NavBar';
-import superagent from 'superagent'
-
+import superagent from 'superagent';
+import { Bar } from 'react-chartjs-2';
+import "../App.css";
 
 class Search extends Component {
   constructor(props) {
@@ -51,7 +52,7 @@ class Search extends Component {
     return (
       <Fragment>
         <NavBar userData={this.props.userData}></NavBar>
-        <h1>Search For a City</h1>
+        <h2 className="searchForCity">Search For a City</h2>
         <input placeholder="City Name" onChange={this.handleInput} value={this.state.input}></input>
         <button onClick={this.handleClick}>Search</button>
         <section>
@@ -67,6 +68,25 @@ class Search extends Component {
           
           
         </section>
+        <section id="chart">
+           
+        <Bar 
+        data={{labels: ['Housing', 'Cost of living', 'Startups', 'Venture Capital', 'Travel Connectivity', 'Commute', 'Business Freedom','Safety','Health Care', 'Education', 'Environmental Quality', 'Economy', 'Taxation', 'Internet access', 'Leisure & Culture', 'Tolerance', 'Outdoors'],
+        datasets: [
+          {
+            label: 'My First dataset',
+            backgroundColor: 'rgba(255,99,132,0.2)',
+            borderColor: 'rgba(255,99,132,1)',
+            borderWidth: 1,
+            hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+            hoverBorderColor: 'rgba(255,99,132,1)',
+            data: [2.29, 3.79, 8.36, 7.55, 2.88, 4.52, 8.67, 5.63, 8.72, 5.71, 7.56, 6.51, 4.77, 4.94, 8.11, 8.08, 7.20]
+          }
+        ]}}
+        
+        />
+    </section>
+
       </Fragment>
     )
 
