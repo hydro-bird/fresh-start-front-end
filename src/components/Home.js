@@ -36,7 +36,7 @@ class Home extends Component {
       let response = await superagent.get(`https://fresh-start-back-end.herokuapp.com/user?email=${user}`)
       let newState = this.state;
       newState.userName = response.body.username;
-      newState.favorites = response.body.faveCities;
+      newState.favorites = response.body.faveCities.map(el=>el.city_name);
       newState.user_id = response.body.user_id;
       await this.setState(newState);
       sessionStorage.setItem('userData', JSON.stringify(this.state));
@@ -47,7 +47,7 @@ class Home extends Component {
     console.log(city);
     if(this.state.favorites.includes(city) === false){
       let newState = this.state;
-      newState.favorites.push({city_name:city});
+      newState.favorites.push(city);
       sessionStorage.setItem('userData', JSON.stringify(newState));
       this.setState(newState);
       superagent.put(`https://fresh-start-back-end.herokuapp.com/addfavorites/?user_id=${this.state.user_id}&geoname_id=${geo}&city_name=${city}`).then(console.log(`sent ${city} and ${geo} and ${this.state.user_id}`))
@@ -58,7 +58,7 @@ class Home extends Component {
     if(this.state.favorites.includes(city)){
       let newState = this.state;
       let newFav = newState.favorites.filter(el=>{
-        return el.city_name !== city;
+        return el !== city;
       })
       newState.favorites = newFav;
       sessionStorage.setItem('userData', JSON.stringify(newState));

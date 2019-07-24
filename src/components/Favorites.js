@@ -35,7 +35,7 @@ class Favorites extends Component {
         await newState.userData.favorites.forEach(el => {
           (async () => {
 
-            let response = await superagent.get(`https://fresh-start-back-end.herokuapp.com/search?city=${el.city_name}`)
+            let response = await superagent.get(`https://fresh-start-back-end.herokuapp.com/search?city=${el}`)
             
             let newCityObj = {};
             newCityObj.name = response.body.name;
