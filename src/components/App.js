@@ -8,6 +8,7 @@ import {
 import AboutUs from "./AboutUs.js";
 import Home from "./Home.js";
 import Favorites from "./Favorites.js";
+
 import "../App.css";
 
 
@@ -20,8 +21,6 @@ class App extends Component {
 
   }
   
-  
-
   render() {
     return (
       

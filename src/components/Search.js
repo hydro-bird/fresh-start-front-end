@@ -62,7 +62,7 @@ class Search extends Component {
         <h2 className="searchForCity">Search For a City</h2>
         <input placeholder="City Name" onChange={this.handleInput} value={this.state.input}></input>
         <button onClick={this.handleClick}>Search</button>
-        <section>
+        <section className="cityInfo">
         <h3>{this.state.cityData.name}</h3>
           <p>{this.state.cityData.population}</p>
           <div>latitude: {this.state.cityData.latitude} longitude: {this.state.cityData.longitude}</div>

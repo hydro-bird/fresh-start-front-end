@@ -50,7 +50,7 @@ body {
   color: #4183c4;
   font-style: initial;
   font-family: monospace;
-  font-size: 30px;
+  font-size: 20px;
  
   
   
@@ -59,7 +59,7 @@ body {
   color: #ffa500;
 }
 #linkOne {
-  font-size: 30px;
+  font-size: 20px;
   font-style: italic;
   font-family: monospace;
 }
@@ -67,7 +67,7 @@ body {
   color: #ffa500;
 }
 #linkTwo {
-  font-size: 30px;
+  font-size: 20px;
   font-style: italic;
   font-family: monospace;
 }
@@ -75,7 +75,7 @@ body {
   color: #ffa500;
 }
 #linkThree {
-  font-size: 30px;
+  font-size: 20px;
   font-style: italic;
   font-family: monospace;
 }
@@ -106,3 +106,36 @@ body {
   margin: 4px 2px;
   cursor: pointer;
 }
+
+/* @media ( min-width: 600px){
+  .mobile-Nav {
+    display: none;
+  }
+}
+
+@media ( max-width: 600px){
+  .links {
+    display: none;
+  }
+} */
+
+.cityInfo  {
+  float: left;
+  padding: 50px 0;
+  color: aqua;
+  
+}
+.cityInfo h3, p{
+  margin:0;
+  }
+
+  .cityInfo h3 {
+    font-size: 30px;
+  }
+
+  .aboutus ul li {
+    list-style: none;
+    
+   
+  }
+
