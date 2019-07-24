@@ -1,13 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Switch,
-} from 'react-router-dom';
 
-import Search from './Search.js'
-import Login from './Login.js';
 import NavBar from './NavBar.js';
 
 

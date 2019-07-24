@@ -1,13 +1,10 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import {
-  BrowserRouter as Router,
-  Link,
-  Route,
-  Switch,
+  
+  Link
+  
 } from 'react-router-dom';
-import AboutUs from './AboutUs.js';
-import Home from './Home.js';
-import Favorites from './Favorites.js'
+
 import "../App.css";
 
 
