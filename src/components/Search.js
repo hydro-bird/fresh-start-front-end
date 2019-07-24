@@ -63,7 +63,7 @@ class Search extends Component {
         <button onClick={this.handleClick}>Search</button>
         {this.state.cityData.name !== '' ?
           <Fragment>
-            <section>
+            <section className="cityInfo">
               <h3>{this.state.cityData.name}</h3>
               <p>Population: {this.state.cityData.population}</p>
               <div>latitude: {this.state.cityData.latitude} longitude: {this.state.cityData.longitude}</div>
@@ -96,8 +96,6 @@ class Search extends Component {
             </section>
           </Fragment>
           : <h3></h3>}
-
-
       </Fragment>
     )
 

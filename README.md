@@ -1,83 +1,34 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
 
-In the project directory, you can run:
+Fresh-Start
+Deplyment Link: 
+Team members
+Peter Lee, Fabian Brooks, Trevor Dobson & Roman Gebrehiwot
 
-### `npm start`
+Team agreement: https://github.com/.....
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Project details
+Project overview & details: https://github.com...
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Wireframes: https://wireframepro.mockflow.com/editor.jsp?editor=on&publicid=Mb4cdbac42d8f66e3ffca57abbca48b3a1563820437974&perm=Create&projectid=M3742c5ed927c473cbe3a074a28a263a81563820498575&ptitle=Fresh%20start&bgcolor=white&category=web#/page/09a21737e68545c185e90f942ced1d8d
 
-### `npm test`
+wireframes: 
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+User stories: https://github.com/
 
-### `npm run build`
+Conflict: https://github.com/hydro-bird/fresh-start-front-end/blob/master/conflict.md
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Versions
+###1.0.0 - June 26, 2019
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Project initialized
+Files scaffolded
+Images gathered & uploaded
 
 
+Image source credits
 
-As a user: I would like to filter my preference and find out the best area.
+Front page seattle image : https://unsplash.com/search/photos/seattle
 
-As a user: I would like to know which area has an affordable house price.
-As a user: I would like to save my searches.
-As a user: I would like to see clear understandable result from query search.
-As a user: I would like to go back to home page and navigate other pages too.
-As a user: I would like to save my favorite searches.
-
-
-
-Resource 
-seattle image : https://unsplash.com/search/photos/seattle
+Data API: https://api.teleport.org/api

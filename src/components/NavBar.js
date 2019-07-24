@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import {
   
   Link
@@ -20,11 +21,15 @@ class NavBar extends Component {
     e.preventDefault();
     console.log('click')
   }
-
+  handleClick() {
+    this.setState({
+        open: !this.state.open
+    });
+}
   render() {
     return (
       <div className="links">
-        <h3>Fresh Start</h3>
+        
         <Link id="linkOne" to="/"> HOME</Link>
         <Link id="linkTwo" to="/about-us">About Us</Link>
         <Link id="linkThree" to={{
