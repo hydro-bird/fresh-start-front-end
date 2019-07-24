@@ -43,15 +43,14 @@ class Home extends Component {
 
     })();
   }
-  handleFavoriteAdd = (city) =>{
+  handleFavoriteAdd = (city,geo) =>{
     console.log(city);
     if(this.state.favorites.includes(city) === false){
       let newState = this.state;
-      newState.favorites.push(city);
+      newState.favorites.push({city_name:city});
       sessionStorage.setItem('userData', JSON.stringify(newState));
-      alert(`${city} successfully added to your favorites`)
-    }else{
-      alert(`${city} is already in your favorites`)
+      this.setState(newState);
+      superagent.put(`https://fresh-start-back-end.herokuapp.com/addfavorites/?user_id=${this.state.user_id}&geoname_id=${geo}&city_name=${city}`).then(console.log(`sent ${city} and ${geo} and ${this.state.user_id}`))
     }
   }
   handleFavoriteRemove = (city) =>{
@@ -59,13 +58,11 @@ class Home extends Component {
     if(this.state.favorites.includes(city)){
       let newState = this.state;
       let newFav = newState.favorites.filter(el=>{
-        return el !== city;
+        return el.city_name !== city;
       })
       newState.favorites = newFav;
       sessionStorage.setItem('userData', JSON.stringify(newState));
-      alert(`${city} successfully removed from your favorites`)
-    }else{
-      alert(`${city} is not in your favorites`)
+      this.setState(newState)
     }
   }
   
