@@ -4,7 +4,7 @@ import NavBar from './NavBar';
 import superagent from 'superagent';
 import { Bar } from 'react-chartjs-2';
 import "../App.css";
-import { async } from 'q';
+
 
 class Search extends Component {
   constructor(props) {
