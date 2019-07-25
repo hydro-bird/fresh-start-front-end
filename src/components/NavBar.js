@@ -18,7 +18,6 @@ class NavBar extends Component {
 
   }
   logOut = (e) => {
-    console.log('click')
     sessionStorage.clear();
     window.location = '/'
   }

@@ -44,7 +44,6 @@ class Home extends Component {
     })();
   }
   handleFavoriteAdd = (city,geo) =>{
-    console.log(city);
       superagent.put(`https://fresh-start-back-end.herokuapp.com/addfavorites/?user_id=${this.state.user_id}&geoname_id=${geo}&city_name=${city}`)
       .then(result=>{
         (async () => {
@@ -69,7 +68,6 @@ class Home extends Component {
       sessionStorage.setItem('userData', JSON.stringify(newState));
       this.setState(newState)
       
-      console.log(joinId)
       superagent.put(`https://fresh-start-back-end.herokuapp.com/removefavorites?join_id=${joinId}`).then(res=>{
         (async () => {
           let response = await superagent.get(`https://fresh-start-back-end.herokuapp.com/user?email=${this.state.userName}`)
