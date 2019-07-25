@@ -4,6 +4,7 @@ import NavBar from './NavBar';
 import superagent from 'superagent';
 import { Bar } from 'react-chartjs-2';
 import "../App.css";
+import { Button, Icon} from 'semantic-ui-react';
 
 
 class Search extends Component {
@@ -63,33 +64,75 @@ class Search extends Component {
         <button onClick={this.handleClick}>Search</button>
         {this.state.cityData.name !== '' ?
           <Fragment>
+            
             <section className="cityInfo">
-              <h3>{this.state.cityData.name}</h3>
-              <p>Population: {this.state.cityData.population}</p>
-              <div>latitude: {this.state.cityData.latitude} longitude: {this.state.cityData.longitude}</div>
-              <div>Quality of Life</div>
-
-              {this.props.userData.favorites.includes(this.state.cityData.name)
-                ? <button onClick={this.removeFavorite}> Remove From Fav</button>
-                : <button onClick={this.addFavorite}> Add to Favorite</button>
+              <section className="thumbsup">
+              <h3>{this.state.cityData.name} {this.props.userData.favorites.includes(this.state.cityData.name)
+                ?  <Icon onClick={this.removeFavorite} color='green' size='small' name='thumbs up'/>
+                :  <Icon icon onClick={this.addFavorite} color='grey' name='thumbs up' size='huge'/>
               }
+              </h3>
+              
+            
+              </section>
+              <p><b>Population: </b>{this.state.cityData.population}</p>
+             
+                <p><b>latitude: </b> {this.state.cityData.latitude} </p>
+               <p> <b>longitude: </b>{this.state.cityData.longitude} </p>
+              
+              
+
+              
             </section>
 
             <section id="chart">
 
               <Bar
+              options= {{
+                legend:{
+                  labels:{
+                    boxWidth: 0,
+                    fontColor: 'aqua',
+                    fontSize: 30,
+
+                  },
+                 
+                },
+                scales: {
+                xAxes: [
+                  {
+                    ticks:{
+                      fontColor: 'aqua',
+                      fontSize: 15,
+                    }
+                  }
+                ],
+                yAxes: [
+                  {
+                    ticks:{
+                      fontColor: 'aqua',
+                      fontSize: 15,
+                    }
+                  }
+                ]
+              }
+              }}
+              
                 data={{
                   labels: this.state.cityData.categories.map(el => el.name),
                   datasets: [
                     {
-                      label: 'My First dataset',
+                      label: 'Quality of Life',
                       backgroundColor: this.state.cityData.categories.map(el => el.score_out_of_10 > 7 ? 'green' : el.score_out_of_10 > 4 && el.score_out_of_10 <= 7 ? 'yellow' : 'red'),
                       borderWidth: 1,
                       hoverBackgroundColor: 'rgba(255,99,132,0.4)',
                       hoverBorderColor: 'rgba(255,99,132,1)',
+                      
+                      
                       data: this.state.cityData.categories.map(el => el.score_out_of_10)
                     }
                   ]
+                  
                 }}
 
               />
