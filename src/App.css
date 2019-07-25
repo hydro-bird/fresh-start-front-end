@@ -154,4 +154,18 @@ body {
   }
   .peter h2 {
    padding: 50px 0;
+}
+  .active.content{
+    height: 500px;
+    position: relative;
+  }
+  @media ( max-width: 770px){
+    .active.content{
+      height: 400px;
+    }
+  }
+  @media ( max-width: 600px){
+    .active.content{
+      height: 310px;
+    }
   }

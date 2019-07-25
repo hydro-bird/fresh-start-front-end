@@ -1,10 +1,12 @@
 import React, { Fragment, Component } from 'react';
-import { Accordion, Icon } from 'semantic-ui-react';
+import { Accordion, Icon, Button } from 'semantic-ui-react';
 import superagent from 'superagent';
 import NavBar from './NavBar';
 import { Bar } from 'react-chartjs-2';
 import { async } from 'q';
-import "../App.css";
+
+import '../App.css';
+
 
 
 class Favorites extends Component {
@@ -23,21 +25,22 @@ class Favorites extends Component {
 
   }
   componentDidMount() {
-    if(sessionStorage.userData){
+    let newState =this.state;
+    if (sessionStorage.userData) {
       let userData = JSON.parse(sessionStorage.getItem('userData'));
-      let newState= this.state;
+      console.log(userData)
+      let newState = this.state;
       newState.userData = userData;
+      console.log(newState)
       this.setState(newState);
     }
-    let newState = this.state;
     (async () => {
-      newState.userData = this.state.userData
       if (newState.userData.favorites.length > 0) {
         await newState.userData.favorites.forEach(el => {
           (async () => {
 
-            let response = await superagent.get(`https://fresh-start-back-end.herokuapp.com/search?city=${el}`)
-            
+            let response = await superagent.get(`https://fresh-start-back-end.herokuapp.com/search?city=${el.city_name}`)
+
             let newCityObj = {};
             newCityObj.name = response.body.name;
             newCityObj.population = response.body.population;
@@ -47,7 +50,7 @@ class Favorites extends Component {
             newCityObj.categories = response.body.categories;
 
             await newState.cities.push(newCityObj);
-            
+            console.log(newState)
             this.setState(newState);
 
           })();
@@ -66,25 +69,44 @@ class Favorites extends Component {
     this.setState({ activeIndex: newIndex })
   }
 
-  removeFavorite = (e) => {
+  removeFavorite = async(e) => {
     let targetName = e.target.name;
     
-    (async()=>{
-      console.log(targetName)
-      let newState = this.state;
-      let newFavArr = await newState.userData.favorites.filter(el=>{
-      return el !== targetName;
-    });
-    console.log(newState.cities)
-    let newCitiesArr = await newState.cities.filter(el=>{
-      return el.name !== targetName;
+    console.log(this.state)
+    let joinId;
+    
+    await this.state.userData.favorites.forEach(el=>{
+      if(el.city_name === targetName){
+        joinId = el.join_id;
+      }
     })
-    newState.cities = newCitiesArr;
-    newState.userData.favorites = newFavArr;
-    console.log(newState)
-    sessionStorage.setItem('userData', JSON.stringify(newState.userData));
-    this.setState(newState);
-    })();
+    console.log(joinId)
+    await superagent.put(`https://fresh-start-back-end.herokuapp.com/removefavorites?join_id=${joinId}`)
+        console.log(targetName)
+        let newState = this.state;
+        console.log(newState)
+        let newFavArr = await newState.userData.favorites.filter(el=>{
+        return el.city_name !== targetName;
+      });
+      console.log(newState.cities)
+      let newCitiesArr = await newState.cities.filter(el=>{
+        return el.name !== targetName;
+      })
+      newState.cities = newCitiesArr;
+      newState.userData.favorites = newFavArr;
+      console.log(this.state, newState)
+    
+    console.log(this.state)
+      let userData = await superagent.get(`https://fresh-start-back-end.herokuapp.com/user?email=${this.state.userData.userName}`)
+      console.log(userData.body)
+      newState.userData.userName = userData.body.username;
+      newState.userData.favorites = userData.body.faveCities.map(el=>el);
+      newState.userData.user_id = userData.body.user_id;
+      await this.setState(newState);
+      sessionStorage.setItem('userData', JSON.stringify(newState.userData));
+      
+      
+    
     
   }
   addFavorite = (e) => {
@@ -114,7 +136,12 @@ class Favorites extends Component {
                     <p><b>Population: </b>{el.population}</p>  
                     <p><b>latitude: </b>{el.latitude}<br/> <b>longitude: </b>{el.longitude}</p> 
                     <p><b>Quality of Life</b></p>
-                    <button onClick={this.removeFavorite} name={el.name}> Remove From Fav</button>
+                    <button style={{
+                        position: 'absolute',
+                        bottom: '0', right: '0',
+                        backgroundColor: 'red',
+                        border: 'none'
+                      }} onClick={this.removeFavorite} name={el.name}>X</button>
                     <section id="chart">
 
               <Bar
