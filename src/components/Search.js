@@ -38,7 +38,7 @@ class Search extends Component {
       newState.cityData.longitude = response.body.longitude;
       newState.cityData.geoNameId = response.body.geoNameId;
       newState.cityData.categories = response.body.categories;
-
+      newState.input = ''
       await this.setState(newState);
 
       console.log(this.state);
@@ -92,8 +92,9 @@ class Search extends Component {
 
               
             </section>
-
-            <section id="chart">
+            {
+              this.state.cityData.categories ? 
+              <section id="chart">
 
               <Bar
               options= {{
@@ -145,6 +146,9 @@ class Search extends Component {
 
               />
             </section>
+            : <p style={{color:'white'}}>Quality of life data for this city is not available</p>
+            }
+            
           </Fragment>
           : <h3></h3>}
       </Fragment>

@@ -17,19 +17,16 @@ class NavBar extends Component {
     }
 
   }
-  handleClick = (e) => {
-    e.preventDefault();
+  logOut = (e) => {
     console.log('click')
+    sessionStorage.clear();
+    window.location = '/'
   }
-  handleClick() {
-    this.setState({
-        open: !this.state.open
-    });
-}
+  
   render() {
     return (
       <div className="links">
-        
+        <Link onClick={this.logOut} id="linkOne" to="/"> Log Out</Link>
         <Link id="linkOne" to="/"> HOME</Link>
         <Link id="linkTwo" to="/about-us">About Us</Link>
         <Link id="linkThree" to={{
