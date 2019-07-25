@@ -1,9 +1,10 @@
 import React, { Fragment, Component } from 'react';
-import { Accordion, Icon, Button } from 'semantic-ui-react';
+import { Accordion, Icon } from 'semantic-ui-react';
 import superagent from 'superagent';
 import NavBar from './NavBar';
 import { Bar } from 'react-chartjs-2';
 import { async } from 'q';
+import '../App.css'
 
 
 class Favorites extends Component {
@@ -22,21 +23,22 @@ class Favorites extends Component {
 
   }
   componentDidMount() {
-    if(sessionStorage.userData){
+    let newState =this.state;
+    if (sessionStorage.userData) {
       let userData = JSON.parse(sessionStorage.getItem('userData'));
-      let newState= this.state;
+      console.log(userData)
+      let newState = this.state;
       newState.userData = userData;
+      console.log(newState)
       this.setState(newState);
     }
-    let newState = this.state;
     (async () => {
-      newState.userData = this.state.userData
       if (newState.userData.favorites.length > 0) {
         await newState.userData.favorites.forEach(el => {
           (async () => {
 
             let response = await superagent.get(`https://fresh-start-back-end.herokuapp.com/search?city=${el.city_name}`)
-            
+
             let newCityObj = {};
             newCityObj.name = response.body.name;
             newCityObj.population = response.body.population;
@@ -46,7 +48,7 @@ class Favorites extends Component {
             newCityObj.categories = response.body.categories;
 
             await newState.cities.push(newCityObj);
-            
+            console.log(newState)
             this.setState(newState);
 
           })();
@@ -68,18 +70,19 @@ class Favorites extends Component {
   removeFavorite = async(e) => {
     let targetName = e.target.name;
     console.log(targetName)
+    console.log(this.state)
     let joinId;
+    
     await this.state.userData.favorites.forEach(el=>{
       if(el.city_name === targetName){
         joinId = el.join_id;
       }
     })
     console.log(joinId)
-    superagent.put(`https://fresh-start-back-end.herokuapp.com/removefavorites?join_id=${joinId}`)
-    .then(result=>{
-      (async()=>{
+    await superagent.put(`https://fresh-start-back-end.herokuapp.com/removefavorites?join_id=${joinId}`)
         console.log(targetName)
         let newState = this.state;
+        console.log(newState)
         let newFavArr = await newState.userData.favorites.filter(el=>{
         return el.city_name !== targetName;
       });
@@ -89,15 +92,18 @@ class Favorites extends Component {
       })
       newState.cities = newCitiesArr;
       newState.userData.favorites = newFavArr;
-      console.log(newState)
-      let userData = await superagent.get(`https://fresh-start-back-end.herokuapp.com/user?email=${this.state.userName}`)
-      newState.userName = userData.body.username;
-      newState.favorites = userData.body.faveCities.map(el=>el);
-      newState.user_id = userData.body.user_id;
+      console.log(this.state, newState)
+    
+    console.log(this.state)
+      let userData = await superagent.get(`https://fresh-start-back-end.herokuapp.com/user?email=${this.state.userData.userName}`)
+      console.log(userData.body)
+      newState.userData.userName = userData.body.username;
+      newState.userData.favorites = userData.body.faveCities.map(el=>el);
+      newState.userData.user_id = userData.body.user_id;
       await this.setState(newState);
       sessionStorage.setItem('userData', JSON.stringify(newState));
-      })();
-    })
+      
+      
     
     
   }
@@ -111,79 +117,54 @@ class Favorites extends Component {
     return (
       <Fragment>
         <NavBar></NavBar>
-        {this.state.userData.favorites.length !== this.state.cities.length? <Icon loading name='spinner' size="massive" color="blue" /> 
-        : 
-        <Accordion fluid styled>
-          {
-            this.state.cities.map((el, i) => {
-              return (
-                <Fragment key={Math.random()}>
-                  <Accordion.Title active={activeIndex === i} index={i} onClick={this.handleClick}>
-                  <h2 style={{textAlign: 'left'}}><Icon name='dropdown' />{el.name}</h2>
-                  
-                  </Accordion.Title>
-                  <Accordion.Content style={{height:'500px'}}active={activeIndex === i}>
-                    <p>{el.population}</p>
-                    <div>latitude: {el.latitude} longitude: {el.longitude}</div>
-                    <div>Quality of Life</div>
-                    <button onClick={this.removeFavorite} name={el.name}> Remove From Fav</button>
-                    <section id="chart">
+        {this.state.userData.favorites.length !== this.state.cities.length ? <Icon loading name='spinner' size="massive" color="blue" />
+          :
+          <Accordion fluid styled>
+            {
+              this.state.cities.map((el, i) => {
+                return (
+                  <Fragment key={Math.random()}>
+                    <Accordion.Title active={activeIndex === i} index={i} onClick={this.handleClick}>
+                      <h2 style={{ textAlign: 'left' }}><Icon name='dropdown' />{el.name}</h2>
 
-              <Bar
-              options= {{
-                legend:{
-                  labels:{
-                    boxWidth: 0,
-                    fontColor: 'black',
-                    fontSize: 30,
+                    </Accordion.Title>
+                    <Accordion.Content active={activeIndex === i}>
+                      <p>{el.population}</p>
+                      <div>latitude: {el.latitude} longitude: {el.longitude}</div>
+                      <div>Quality of Life</div>
+                      <button style={{
+                        position: 'absolute',
+                        bottom: '0', right: '0'
+                      }} onClick={this.removeFavorite} name={el.name}></button>
+                      <section id="chart">
 
-                  },
-                 
-                },
-                scales: {
-                xAxes: [
-                  {
-                    ticks:{
-                      fontColor: 'black',
-                      fontSize: 15,
-                    }
-                  }
-                ],
-                yAxes: [
-                  {
-                    ticks:{
-                      fontColor: 'black',
-                      fontSize: 15,
-                    }
-                  }
-                ]
-              }
-              }}
-                data={{
-                  labels: el.categories.map(category => category.name),
-                  datasets: [
-                    {
-                      label: 'My First dataset',
-                      backgroundColor: el.categories.map(item => item.score_out_of_10 > 7 ? 'green' : item.score_out_of_10 > 4 && item.score_out_of_10 <= 7 ? 'yellow' : 'red'),
-                      borderWidth: 1,
-                      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                      hoverBorderColor: 'rgba(255,99,132,1)',
-                      data: el.categories.map(item => item.score_out_of_10)
-                    }
-                  ]
-                }}
+                        <Bar
+                          data={{
+                            labels: el.categories.map(category => category.name),
+                            datasets: [
+                              {
+                                label: 'My First dataset',
+                                backgroundColor: el.categories.map(item => item.score_out_of_10 > 7 ? 'green' : el.score_out_of_10 > 4 && el.score_out_of_10 <= 7 ? 'yellow' : 'red'),
+                                borderWidth: 1,
+                                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                                hoverBorderColor: 'rgba(255,99,132,1)',
+                                data: el.categories.map(item => item.score_out_of_10)
+                              }
+                            ]
+                          }}
 
-              />
-            </section>
-                  </Accordion.Content>
-                </Fragment>
-              )
-            })
-          }
+                        />
+                      </section>
+                      
+                    </Accordion.Content>
+                  </Fragment>
+                )
+              })
+            }
 
 
 
-        </Accordion>
+          </Accordion>
         }
       </Fragment>
     )
