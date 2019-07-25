@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import { Accordion, Icon } from 'semantic-ui-react';
+import { Accordion, Icon, Button } from 'semantic-ui-react';
 import superagent from 'superagent';
 import NavBar from './NavBar';
 import { Bar } from 'react-chartjs-2';
@@ -35,7 +35,7 @@ class Favorites extends Component {
         await newState.userData.favorites.forEach(el => {
           (async () => {
 
-            let response = await superagent.get(`https://fresh-start-back-end.herokuapp.com/search?city=${el}`)
+            let response = await superagent.get(`https://fresh-start-back-end.herokuapp.com/search?city=${el.city_name}`)
             
             let newCityObj = {};
             newCityObj.name = response.body.name;
@@ -65,25 +65,40 @@ class Favorites extends Component {
     this.setState({ activeIndex: newIndex })
   }
 
-  removeFavorite = (e) => {
+  removeFavorite = async(e) => {
     let targetName = e.target.name;
-    
-    (async()=>{
-      console.log(targetName)
-      let newState = this.state;
-      let newFavArr = await newState.userData.favorites.filter(el=>{
-      return el !== targetName;
-    });
-    console.log(newState.cities)
-    let newCitiesArr = await newState.cities.filter(el=>{
-      return el.name !== targetName;
+    console.log(targetName)
+    let joinId;
+    await this.state.userData.favorites.forEach(el=>{
+      if(el.city_name === targetName){
+        joinId = el.join_id;
+      }
     })
-    newState.cities = newCitiesArr;
-    newState.userData.favorites = newFavArr;
-    console.log(newState)
-    sessionStorage.setItem('userData', JSON.stringify(newState.userData));
-    this.setState(newState);
-    })();
+    console.log(joinId)
+    superagent.put(`https://fresh-start-back-end.herokuapp.com/removefavorites?join_id=${joinId}`)
+    .then(result=>{
+      (async()=>{
+        console.log(targetName)
+        let newState = this.state;
+        let newFavArr = await newState.userData.favorites.filter(el=>{
+        return el.city_name !== targetName;
+      });
+      console.log(newState.cities)
+      let newCitiesArr = await newState.cities.filter(el=>{
+        return el.name !== targetName;
+      })
+      newState.cities = newCitiesArr;
+      newState.userData.favorites = newFavArr;
+      console.log(newState)
+      let userData = await superagent.get(`https://fresh-start-back-end.herokuapp.com/user?email=${this.state.userName}`)
+      newState.userName = userData.body.username;
+      newState.favorites = userData.body.faveCities.map(el=>el);
+      newState.user_id = userData.body.user_id;
+      await this.setState(newState);
+      sessionStorage.setItem('userData', JSON.stringify(newState));
+      })();
+    })
+    
     
   }
   addFavorite = (e) => {
