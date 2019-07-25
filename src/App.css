@@ -44,6 +44,7 @@ body {
   
   display: flex;
   justify-content: space-around;
+
    
 }
 .links h3 {
@@ -150,4 +151,7 @@ body {
 
   Accordion fluid styled {
     padding: 0;
+  }
+  .peter h2 {
+   padding: 50px 0;
   }

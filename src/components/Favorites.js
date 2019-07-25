@@ -4,6 +4,7 @@ import superagent from 'superagent';
 import NavBar from './NavBar';
 import { Bar } from 'react-chartjs-2';
 import { async } from 'q';
+import "../App.css";
 
 
 class Favorites extends Component {
@@ -98,7 +99,7 @@ class Favorites extends Component {
         <NavBar></NavBar>
         {this.state.userData.favorites.length !== this.state.cities.length? <Icon loading name='spinner' size="massive" color="blue" /> 
         : 
-        <Accordion fluid styled>
+        <Accordion fluid styled style={{marginTop: '50px'}}>
           {
             this.state.cities.map((el, i) => {
               return (
@@ -108,9 +109,11 @@ class Favorites extends Component {
                   
                   </Accordion.Title>
                   <Accordion.Content style={{height:'500px'}}active={activeIndex === i}>
-                    <p>{el.population}</p>
-                    <div>latitude: {el.latitude} longitude: {el.longitude}</div>
-                    <div>Quality of Life</div>
+
+                  
+                    <p><b>Population: </b>{el.population}</p>  
+                    <p><b>latitude: </b>{el.latitude}<br/> <b>longitude: </b>{el.longitude}</p> 
+                    <p><b>Quality of Life</b></p>
                     <button onClick={this.removeFavorite} name={el.name}> Remove From Fav</button>
                     <section id="chart">
 
