@@ -4,6 +4,7 @@ import NavBar from './NavBar';
 import superagent from 'superagent';
 import { Bar } from 'react-chartjs-2';
 import "../App.css";
+import { join } from 'path';
 
 
 class Search extends Component {
@@ -46,9 +47,14 @@ class Search extends Component {
     newState.input = e.target.value;
     this.setState(newState);
   }
-  removeFavorite = () => {
-
-    this.props.handleFavoriteRemove(this.state.cityData.name);
+  removeFavorite = async() => {
+    let joinId;
+    await this.props.userData.favorites.forEach(el=>{
+      if(el.city_name === this.state.cityData.name){
+        joinId = el.join_id;
+      }
+    })
+    this.props.handleFavoriteRemove(this.state.cityData.name,joinId);
   }
   addFavorite = () => {
     this.props.handleFavoriteAdd(this.state.cityData.name,this.state.cityData.geoNameId);
@@ -65,11 +71,11 @@ class Search extends Component {
           <Fragment>
             <section className="cityInfo">
               <h3>{this.state.cityData.name}</h3>
-              <p>Population: {this.state.cityData.population}</p>
+              <p>Population: {this.state.cityData.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
               <div>latitude: {this.state.cityData.latitude} longitude: {this.state.cityData.longitude}</div>
               <div>Quality of Life</div>
 
-              {this.props.userData.favorites.includes(this.state.cityData.name)
+              {this.props.userData.favorites.filter(el=>el.city_name ===this.state.cityData.name).length>0
                 ? <button onClick={this.removeFavorite}> Remove From Fav</button>
                 : <button onClick={this.addFavorite}> Add to Favorite</button>
               }
