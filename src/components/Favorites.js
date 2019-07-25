@@ -109,6 +109,12 @@ class Favorites extends Component {
         <Accordion fluid styled style={{marginTop: '50px'}}>
           {
             this.state.cities.map((el, i) => {
+              let dataChart;
+              if(el.categories){
+                dataChart= el.categories.map(item => item.score_out_of_10)
+              dataChart.push(10)
+              }
+               
               return (
                 <Fragment key={Math.random()}>
                   <Accordion.Title active={activeIndex === i} index={i} onClick={this.handleClick}>
@@ -168,12 +174,12 @@ class Favorites extends Component {
                   labels: el.categories.map(category => category.name),
                   datasets: [
                     {
-                      label: 'My First dataset',
+                      label: 'Quality of Life',
                       backgroundColor: el.categories.map(item => item.score_out_of_10 > 7 ? 'green' : item.score_out_of_10 > 4 && item.score_out_of_10 <= 7 ? 'yellow' : 'red'),
                       borderWidth: 1,
                       hoverBackgroundColor: 'rgba(255,99,132,0.4)',
                       hoverBorderColor: 'rgba(255,99,132,1)',
-                      data: el.categories.map(item => item.score_out_of_10)
+                      data: dataChart
                     }
                   ]
                 }}
