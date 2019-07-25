@@ -4,7 +4,9 @@ import superagent from 'superagent';
 import NavBar from './NavBar';
 import { Bar } from 'react-chartjs-2';
 import { async } from 'q';
-import '../App.css'
+
+import '../App.css';
+
 
 
 class Favorites extends Component {
@@ -117,56 +119,86 @@ class Favorites extends Component {
     return (
       <Fragment>
         <NavBar></NavBar>
-        {this.state.userData.favorites.length !== this.state.cities.length ? <Icon loading name='spinner' size="massive" color="blue" />
-          :
-          <Accordion fluid styled>
-            {
-              this.state.cities.map((el, i) => {
-                return (
-                  <Fragment key={Math.random()}>
-                    <Accordion.Title active={activeIndex === i} index={i} onClick={this.handleClick}>
-                      <h2 style={{ textAlign: 'left' }}><Icon name='dropdown' />{el.name}</h2>
+        {this.state.userData.favorites.length !== this.state.cities.length? <Icon loading name='spinner' size="massive" color="blue" /> 
+        : 
+        <Accordion fluid styled style={{marginTop: '50px'}}>
+          {
+            this.state.cities.map((el, i) => {
+              return (
+                <Fragment key={Math.random()}>
+                  <Accordion.Title active={activeIndex === i} index={i} onClick={this.handleClick}>
+                  <h2 style={{textAlign: 'left'}}><Icon name='dropdown' />{el.name}</h2>
+                  
+                  </Accordion.Title>
+                  <Accordion.Content style={{height:'500px'}}active={activeIndex === i}>
 
-                    </Accordion.Title>
-                    <Accordion.Content active={activeIndex === i}>
-                      <p>{el.population}</p>
-                      <div>latitude: {el.latitude} longitude: {el.longitude}</div>
-                      <div>Quality of Life</div>
-                      <button style={{
+                  
+                    <p><b>Population: </b>{el.population}</p>  
+                    <p><b>latitude: </b>{el.latitude}<br/> <b>longitude: </b>{el.longitude}</p> 
+                    <p><b>Quality of Life</b></p>
+                    <button style={{
                         position: 'absolute',
                         bottom: '0', right: '0',
                         backgroundColor: 'red',
                         border: 'none'
                       }} onClick={this.removeFavorite} name={el.name}>X</button>
-                      <section id="chart">
+                    <section id="chart">
 
-                        <Bar
-                          data={{
-                            labels: el.categories.map(category => category.name),
-                            datasets: [
-                              {
-                                label: 'My First dataset',
-                                backgroundColor: el.categories.map(item => item.score_out_of_10 > 7 ? 'green' : el.score_out_of_10 > 4 && el.score_out_of_10 <= 7 ? 'yellow' : 'red'),
-                                borderWidth: 1,
-                                hoverBackgroundColor: 'rgba(255,99,132,0.4)',
-                                hoverBorderColor: 'rgba(255,99,132,1)',
-                                data: el.categories.map(item => item.score_out_of_10)
-                              }
-                            ]
-                          }}
+              <Bar
+              options= {{
+                legend:{
+                  labels:{
+                    boxWidth: 0,
+                    fontColor: 'black',
+                    fontSize: 30,
 
-                        />
-                      </section>
-                      
-                    </Accordion.Content>
-                  </Fragment>
-                )
-              })
-            }
+                  },
+                 
+                },
+                scales: {
+                xAxes: [
+                  {
+                    ticks:{
+                      fontColor: 'black',
+                      fontSize: 15,
+                    }
+                  }
+                ],
+                yAxes: [
+                  {
+                    ticks:{
+                      fontColor: 'black',
+                      fontSize: 15,
+                    }
+                  }
+                ]
+              }
+              }}
+                data={{
+                  labels: el.categories.map(category => category.name),
+                  datasets: [
+                    {
+                      label: 'My First dataset',
+                      backgroundColor: el.categories.map(item => item.score_out_of_10 > 7 ? 'green' : item.score_out_of_10 > 4 && item.score_out_of_10 <= 7 ? 'yellow' : 'red'),
+                      borderWidth: 1,
+                      hoverBackgroundColor: 'rgba(255,99,132,0.4)',
+                      hoverBorderColor: 'rgba(255,99,132,1)',
+                      data: el.categories.map(item => item.score_out_of_10)
+                    }
+                  ]
+                }}
+
+              />
+            </section>
+                  </Accordion.Content>
+                </Fragment>
+              )
+            })
+          }
 
 
 
-          </Accordion>
+        </Accordion>
         }
       </Fragment>
     )

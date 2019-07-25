@@ -21,41 +21,43 @@ class AboutUs extends Component {
       <NavBar></NavBar>
       <div className="aboutus">
         <section className="peter">
-          <h2>Peter Lee</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <ul>
-            <li>name:</li>
-            <li>email: </li>
-            <li> github page: </li>
+          <ul style={{fontSize:'20px'}}> 
+            <li><b>Peter Lee</b></li>
+            <li>email: leepj85@gmail.com </li>
+            <li>github: https://github.com/leepj85 </li>
+            <li>linkedin: https://www.linkedin.com/in/leepj85/ </li>
             <li></li>
           </ul>
         </section>
         <section className="fabian">
-          <h2>Fabian Brooks</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <ul>
-            <li>name:</li>
-            <li>email:</li>
-            <li>github page:</li>
+          
+        <ul style={{fontSize:'20px'}}> 
+            <li><b>Fabian Brooks</b></li>
+            <li>email: fabian.brooks.one@gmail.com </li>
+            <li>github: https://github.com/FabianB14 </li>
+            <li>linkedin: https://www.linkedin.com/in/fabian-brooks/</li>
+            <li></li>
           </ul>
         </section>
         <section className="trevor">
-          <h2>Trevor Dobson</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <ul>
-            <li>name:</li>
-            <li>email:</li>
-            <li>github page:</li>
+        <ul style={{fontSize:'20px'}}> 
+            <li><b>Trevor Dobson</b></li>
+            <li>email: trevorjdobson@gmail.com </li>
+            <li>github:  </li>
+            <li>linkedin: </li>
+            <li></li>
           </ul>
         </section>
         <section className="roman">
-          <h2>Roman Gebrehiwot</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-          <ul>
-            <li>name:</li>
-            <li>email:</li>
-            <li>github page:</li>
+        <section className="trevor">
+        <ul style={{fontSize:'20px'}}> 
+            <li><b>Roman Gebrehiwot</b></li>
+            <li>email: rttgg1@gmail.com </li>
+            <li>github: https://github.com/rttgg </li>
+            <li>linkedin: https://www.linkedin.com/in/roman-gebrehiwot/ </li>
+            <li></li>
           </ul>
+        </section>
         </section>
       </div>
       </Fragment>
