@@ -134,6 +134,9 @@ body {
     font-size: 40px;
     /* margin-bottom: 0; */
   }
+  .aboutus{
+    color: white;
+  }
 
   .aboutus ul li {
     list-style: none;
