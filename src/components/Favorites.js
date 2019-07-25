@@ -1,5 +1,5 @@
 import React, { Fragment, Component } from 'react';
-import { Accordion, Icon } from 'semantic-ui-react';
+import { Accordion, Icon, Button } from 'semantic-ui-react';
 import superagent from 'superagent';
 import NavBar from './NavBar';
 import { Bar } from 'react-chartjs-2';
@@ -69,7 +69,7 @@ class Favorites extends Component {
 
   removeFavorite = async(e) => {
     let targetName = e.target.name;
-    console.log(targetName)
+    
     console.log(this.state)
     let joinId;
     
@@ -101,7 +101,7 @@ class Favorites extends Component {
       newState.userData.favorites = userData.body.faveCities.map(el=>el);
       newState.userData.user_id = userData.body.user_id;
       await this.setState(newState);
-      sessionStorage.setItem('userData', JSON.stringify(newState));
+      sessionStorage.setItem('userData', JSON.stringify(newState.userData));
       
       
     
@@ -134,8 +134,10 @@ class Favorites extends Component {
                       <div>Quality of Life</div>
                       <button style={{
                         position: 'absolute',
-                        bottom: '0', right: '0'
-                      }} onClick={this.removeFavorite} name={el.name}></button>
+                        bottom: '0', right: '0',
+                        backgroundColor: 'red',
+                        border: 'none'
+                      }} onClick={this.removeFavorite} name={el.name}>X</button>
                       <section id="chart">
 
                         <Bar

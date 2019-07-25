@@ -78,7 +78,7 @@ class Home extends Component {
           newState.favorites = response.body.faveCities.map(el=>el);
           newState.user_id = response.body.user_id;
           await this.setState(newState);
-          sessionStorage.setItem('userData', JSON.stringify(this.state.userData));
+          sessionStorage.setItem('userData', JSON.stringify(this.state));
     
         })();
       })
