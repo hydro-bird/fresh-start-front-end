@@ -69,7 +69,7 @@ class Search extends Component {
               <section className="thumbsup">
               <h3>{this.state.cityData.name} {this.props.userData.favorites.includes(this.state.cityData.name)
                 ?  <Icon onClick={this.removeFavorite} color='green' size='small' name='thumbs up'/>
-                :  <Icon icon onClick={this.addFavorite} color='grey' name='thumbs up' size='huge'/>
+                :  <Icon icon onClick={this.addFavorite} color='grey' name='thumbs up' size='small'/>
               }
               </h3>
               

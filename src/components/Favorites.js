@@ -115,12 +115,41 @@ class Favorites extends Component {
                     <section id="chart">
 
               <Bar
+              options= {{
+                legend:{
+                  labels:{
+                    boxWidth: 0,
+                    fontColor: 'black',
+                    fontSize: 30,
+
+                  },
+                 
+                },
+                scales: {
+                xAxes: [
+                  {
+                    ticks:{
+                      fontColor: 'black',
+                      fontSize: 15,
+                    }
+                  }
+                ],
+                yAxes: [
+                  {
+                    ticks:{
+                      fontColor: 'black',
+                      fontSize: 15,
+                    }
+                  }
+                ]
+              }
+              }}
                 data={{
                   labels: el.categories.map(category => category.name),
                   datasets: [
                     {
                       label: 'My First dataset',
-                      backgroundColor: el.categories.map(item => item.score_out_of_10 > 7 ? 'green' : el.score_out_of_10 > 4 && el.score_out_of_10 <= 7 ? 'yellow' : 'red'),
+                      backgroundColor: el.categories.map(item => item.score_out_of_10 > 7 ? 'green' : item.score_out_of_10 > 4 && item.score_out_of_10 <= 7 ? 'yellow' : 'red'),
                       borderWidth: 1,
                       hoverBackgroundColor: 'rgba(255,99,132,0.4)',
                       hoverBorderColor: 'rgba(255,99,132,1)',
