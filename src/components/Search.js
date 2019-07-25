@@ -61,6 +61,11 @@ class Search extends Component {
   }
 
   render() {
+    let dataChart;
+              if(this.state.cityData.categories){
+                dataChart= this.state.cityData.categories.map(item => item.score_out_of_10)
+              dataChart.push(10)
+              }
     return (
       <Fragment>
         <NavBar userData={this.props.userData}></NavBar>
@@ -91,6 +96,7 @@ class Search extends Component {
               
             </section>
             {
+              
               this.state.cityData.categories ? 
               <section id="chart">
 
@@ -136,7 +142,7 @@ class Search extends Component {
                       hoverBorderColor: 'rgba(255,99,132,1)',
                       
                       
-                      data: this.state.cityData.categories.map(el => el.score_out_of_10)
+                      data: dataChart
                     }
                   ]
                   
