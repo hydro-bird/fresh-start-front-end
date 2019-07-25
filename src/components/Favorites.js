@@ -144,8 +144,11 @@ class Favorites extends Component {
                         borderRadius: '20%'
                       
                       }} onClick={this.removeFavorite} name={el.name}>X</button>
-                    <section id="chart">
 
+                {
+                el.categories ?
+                <section id="chart">
+                  
               <Bar
               options= {{
                 legend:{
@@ -192,6 +195,9 @@ class Favorites extends Component {
 
               />
             </section>
+            : <p>Quality of life data for this city is not available</p>
+              }  
+                    
                   </Accordion.Content>
                 </Fragment>
               )
