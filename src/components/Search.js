@@ -76,8 +76,9 @@ class Search extends Component {
 
               <section className="thumbsup">
               <h3>{this.state.cityData.name} {this.props.userData.favorites.filter(el=>el.city_name ===this.state.cityData.name).length>0
-                ? <button onClick={this.removeFavorite}> Remove From Fav</button>
-                : <button onClick={this.addFavorite}> Add to Favorite</button>}
+                ?  <Icon onClick={this.removeFavorite} color='green' size='small' name='thumbs up'/>
+                :  <Icon icon onClick={this.addFavorite} color='grey' name='thumbs up' size='small'/>
+              }
               </h3>
               
             
