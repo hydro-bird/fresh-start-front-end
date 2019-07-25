@@ -40,8 +40,6 @@ class Search extends Component {
       newState.cityData.categories = response.body.categories;
       newState.input = ''
       await this.setState(newState);
-
-      console.log(this.state);
     })();
   }
   handleInput = (e) => {

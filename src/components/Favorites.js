@@ -28,10 +28,8 @@ class Favorites extends Component {
     let newState =this.state;
     if (sessionStorage.userData) {
       let userData = JSON.parse(sessionStorage.getItem('userData'));
-      console.log(userData)
       let newState = this.state;
       newState.userData = userData;
-      console.log(newState)
       this.setState(newState);
     }
     (async () => {
@@ -50,7 +48,6 @@ class Favorites extends Component {
             newCityObj.categories = response.body.categories;
 
             await newState.cities.push(newCityObj);
-            console.log(newState)
             this.setState(newState);
 
           })();
@@ -72,7 +69,6 @@ class Favorites extends Component {
   removeFavorite = async(e) => {
     let targetName = e.target.name;
     
-    console.log(this.state)
     let joinId;
     
     await this.state.userData.favorites.forEach(el=>{
@@ -80,25 +76,17 @@ class Favorites extends Component {
         joinId = el.join_id;
       }
     })
-    console.log(joinId)
     await superagent.put(`https://fresh-start-back-end.herokuapp.com/removefavorites?join_id=${joinId}`)
-        console.log(targetName)
         let newState = this.state;
-        console.log(newState)
         let newFavArr = await newState.userData.favorites.filter(el=>{
         return el.city_name !== targetName;
       });
-      console.log(newState.cities)
       let newCitiesArr = await newState.cities.filter(el=>{
         return el.name !== targetName;
       })
       newState.cities = newCitiesArr;
       newState.userData.favorites = newFavArr;
-      console.log(this.state, newState)
-    
-    console.log(this.state)
       let userData = await superagent.get(`https://fresh-start-back-end.herokuapp.com/user?email=${this.state.userData.userName}`)
-      console.log(userData.body)
       newState.userData.userName = userData.body.username;
       newState.userData.favorites = userData.body.faveCities.map(el=>el);
       newState.userData.user_id = userData.body.user_id;
@@ -109,10 +97,7 @@ class Favorites extends Component {
     
     
   }
-  addFavorite = (e) => {
-    console.log('click')
-    console.log(e.target.name)
-  }
+  
 
   render() {
     const { activeIndex } = this.state

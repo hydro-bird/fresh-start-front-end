@@ -20,7 +20,6 @@ class Login extends Component {
 
   }
   handleInput = (e) => {
-    console.log(e.target.value)
     this.setState({ input: e.target.value })
   }
 
