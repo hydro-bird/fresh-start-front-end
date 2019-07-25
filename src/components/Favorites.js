@@ -130,17 +130,19 @@ class Favorites extends Component {
                   <h2 style={{textAlign: 'left'}}><Icon name='dropdown' />{el.name}</h2>
                   
                   </Accordion.Title>
-                  <Accordion.Content style={{height:'500px'}}active={activeIndex === i}>
+                  <Accordion.Content active={activeIndex === i}>
 
                   
-                    <p><b>Population: </b>{el.population}</p>  
-                    <p><b>latitude: </b>{el.latitude}<br/> <b>longitude: </b>{el.longitude}</p> 
+                    <p><b>Population: </b>{el.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>  
+                    <p><b>latitude: </b>{el.latitude}<br/> <b>longitude: </b>{el.longitude*-1}</p> 
                     <p><b>Quality of Life</b></p>
                     <button style={{
                         position: 'absolute',
-                        bottom: '0', right: '0',
+                        bottom: '5px', right: '5px',
                         backgroundColor: 'red',
-                        border: 'none'
+                        border: 'none',
+                        borderRadius: '20%'
+                      
                       }} onClick={this.removeFavorite} name={el.name}>X</button>
                     <section id="chart">
 

@@ -86,7 +86,7 @@ class Search extends Component {
               <p><b>Population: </b>{this.state.cityData.population.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
              
                 <p><b>latitude: </b> {this.state.cityData.latitude} </p>
-               <p> <b>longitude: </b>{this.state.cityData.longitude} </p>
+               <p> <b>longitude: </b>{this.state.cityData.longitude*-1} </p>
               
               
 
